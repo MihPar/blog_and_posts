@@ -1,28 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { validationResult } from "express-validator";
+import { validationResult, ValidationError } from "express-validator";
 import { HTTP_STATUS } from "../utils";
 
-export type ValidationError = {
-	type: any;
-	msg: string;
-	path: string;
-  };
-  
-
-export const ValueMiddleware = function(
-	req: Request,
-	res: Response,
-	next: NextFunction
-  ) {
-	const errors = validationResult(req);
-	// if (!errors.isEmpty()) {
-	//   const errorMessage = errors.array({onlyFirstError: true}).map(errorFormater)
-	//   res.status(HTTP_STATUS.BAD_REQUEST_400).send(errorMessage)
-	//   return 
-	// } else {
-	//   next();
-	// }
-  };
+// export type ValidationError = {
+// 	type: any;
+// 	msg: string;
+// 	path: string;
+//   };
   
   export const errorFormater = (error: ValidationError) => {
 	switch (error.type) {
@@ -39,4 +23,23 @@ export const ValueMiddleware = function(
 		};
 	}
   };
+  
+
+export const ValueMiddleware = function(
+	req: Request,
+	res: Response,
+	next: NextFunction
+  ) {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+	  const errorMessage = errors.array({onlyFirstError: true}).map(item => {
+		return errorFormater(item)
+	  })
+	  res.status(HTTP_STATUS.BAD_REQUEST_400).send(errorMessage)
+	  return 
+	} else {
+	  next();
+	}
+  };
+  
   

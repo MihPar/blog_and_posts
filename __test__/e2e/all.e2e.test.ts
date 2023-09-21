@@ -77,8 +77,9 @@ describe("/posts and blogs", () => {
 
   let createResponse: any = null
   it("should create post with correct input data", async () => {
+
      createResponse = await request(app)
-      .post("/posts")
+      .post("/posts").set({"Authorization": "Basic admin:qwerty"})
       .send({
         title: "newMan",
         shortDescription: "new decsription",

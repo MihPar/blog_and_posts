@@ -14,3 +14,5 @@ exports.app.use((0, express_2.default)());
 exports.app.use('/posts', posts_router_1.postsRouter);
 exports.app.use('/blogs', blogs_router_1.blogsRouter);
 exports.app.use('/blogs', deletedAllRouter_1.deletedAllRouter);
+const PORT = process.env.PORT || 4000;
+exports.app.listen(PORT, () => { console.log(`Server was started at port ${PORT}`); });
