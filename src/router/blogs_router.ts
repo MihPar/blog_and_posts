@@ -34,10 +34,10 @@ blogsRouter.post(
       req.body.description,
       req.body.websiteUrl
     );
-    if (newBlogs) {
-      res.sendStatus(HTTP_STATUS.CREATED_201);
+    if (!newBlogs) {
+		res.sendStatus(HTTP_STATUS.BAD_REQUEST_400);
     } else {
-      res.sendStatus(HTTP_STATUS.BAD_REQUEST_400);
+		res.sendStatus(HTTP_STATUS.CREATED_201);
     }
   }
 );
@@ -46,10 +46,10 @@ blogsRouter.post(
 
 blogsRouter.get("/:id", function (req: Request, res: Response) {
   const blog = blogsRepositories.findBlogsId(req.params.id);
-  if (blog) {
-    res.status(HTTP_STATUS.OK_200).send(blog);
-  } else {
+  if (!blog) {
     res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
+  } else {
+    res.status(HTTP_STATUS.OK_200).send(blog);
   }
 });
 
@@ -69,20 +69,20 @@ blogsRouter.put(
       req.body.description,
       req.body.websiteUrl
     );
-    if (isUpdateBlog) {
-      const findBlog = blogsRepositories.findBlogsId(req.params.id);
-      res.status(HTTP_STATUS.NO_CONTENT_204).send("No content");
+    if (!isUpdateBlog) {
+		res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
     } else {
-      res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
+		const findBlog = blogsRepositories.findBlogsId(req.params.id);
+		res.status(HTTP_STATUS.NO_CONTENT_204).send("No content");
     }
   }
 );
 
 blogsRouter.delete("/:id", function (req: Request, res: Response) {
   const findBlog = blogsRepositories.deletedBlogsId(req.params.id);
-  if (findBlog) {
-    res.status(HTTP_STATUS.NO_CONTENT_204).send("No content");
+  if (!findBlog) {
+	res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
   } else {
-    res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
+    res.status(HTTP_STATUS.NO_CONTENT_204).send("No content");
   }
 });

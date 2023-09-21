@@ -41,7 +41,7 @@ exports.postsRepositories = {
         }
         return false;
     },
-    postsRepositories() {
+    deletedAllPosts() {
         const deletedAllPosts = db_posts_1.posts.slice(0, db_posts_1.posts.length);
         return deletedAllPosts;
     },

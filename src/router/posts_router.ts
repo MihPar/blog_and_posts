@@ -30,10 +30,10 @@ postsRouter.post(
   ValueMiddleware,
   function (req: Request, res: Response) {
 	const newPosts = postsRepositories.createPost(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId, req.body.blogName)
-	if(newPosts) {
-		res.sendStatus(HTTP_STATUS.CREATED_201)
-	} else {
+	if(!newPosts) {
 		res.sendStatus(HTTP_STATUS.BAD_REQUEST_400)
+	} else {
+		res.sendStatus(HTTP_STATUS.CREATED_201)
 	}
   }
 );
@@ -50,10 +50,10 @@ postsRouter.get(
   ValueMiddleware,
   function(req: Request, res: Response) {
 	const post = postsRepositories.findPostId(req.params.id)
-	if(post) {
-		res.status(HTTP_STATUS.OK_200).send(post)
-	} else {
+	if(!post) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
+	} else {
+		res.status(HTTP_STATUS.OK_200).send(post)
 	}
   }
 );
@@ -70,11 +70,11 @@ postsRouter.put(
   ValueMiddleware,
   function(req: Request, res: Response) {
 	const isUpdatePost = postsRepositories.updatePostId(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
-	if(isUpdatePost) {
+	if(!isUpdatePost) {
+		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
+	} else {
 		const findPost = postsRepositories.findPostId(req.params.id)
 		res.status(HTTP_STATUS.NO_CONTENT_204).send('No content')
-	} else {
-		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
 	}
   }
 );
@@ -83,9 +83,9 @@ postsRouter.put(
 
 postsRouter.delete('/:id', function(req: Request, res: Response) {
 	const findPost = postsRepositories.deletePost(req.params.id)
-	if(findPost) {
-		res.status(HTTP_STATUS.NO_CONTENT_204).send('No content')
-	} else {
+	if(!findPost) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
+	} else {
+		res.status(HTTP_STATUS.NO_CONTENT_204).send('No content')
 	}
 })

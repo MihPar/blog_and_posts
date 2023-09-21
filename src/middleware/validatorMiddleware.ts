@@ -15,13 +15,13 @@ export const ValueMiddleware = function(
 	next: NextFunction
   ) {
 	const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-	  const errorMessage = errors.array({onlyFirstError: true}).map(errorFormater)
-	  res.status(HTTP_STATUS.BAD_REQUEST_400).send(errorMessage)
-	  return 
-	} else {
-	  next();
-	}
+	// if (!errors.isEmpty()) {
+	//   const errorMessage = errors.array({onlyFirstError: true}).map(errorFormater)
+	//   res.status(HTTP_STATUS.BAD_REQUEST_400).send(errorMessage)
+	//   return 
+	// } else {
+	//   next();
+	// }
   };
   
   export const errorFormater = (error: ValidationError) => {

@@ -5,10 +5,10 @@ const db_blogs_1 = require("../db/db_blogs");
 exports.blogsRepositories = {
     createNewBlogs(id, name, description, websiteUrl) {
         const newBlogs = {
-            id: id,
-            name: name,
-            description: description,
-            websiteUrl: websiteUrl,
+            id: new Date().toISOString(),
+            name,
+            description,
+            websiteUrl,
         };
         db_blogs_1.blogs.push(newBlogs);
         return db_blogs_1.blogs;
