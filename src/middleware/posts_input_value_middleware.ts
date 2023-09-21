@@ -10,7 +10,7 @@ export const content = body('content').isLength({min: 1, max: 1000}).isString().
 
 export const blogId = body('blogId').isString()
 
-export const inputValueMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const inputPostsValueMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	const errors = validationResult(req)
 	if(!errors.isEmpty()) {
 		res.status(400).json({errors: errors.array()})

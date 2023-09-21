@@ -2,23 +2,6 @@ import { obj, posts } from "../db/db_posts"
 
 
 export const postsRepositories = {
-  findPosts(
-    id: string,
-    title: string,
-    shortDescription: string,
-    content: string,
-	blogId: string,
-	blogName: string
-  ) {
-    if (title) {
-      const filteredPosts = posts.filter(function (p: any) {
-        return p.title.indexOf(title) > -1;
-      });
-      return filteredPosts;
-    } else {
-      return posts;
-    }
-  },
   createPost(
     id: string,
     title: string,
@@ -36,7 +19,7 @@ export const postsRepositories = {
       blogName: blogName,
     };
     posts.push(newPost);
-    return newPost;
+    return posts;
   },
   findPostId(id: string) {
     const post = posts.find((p) => p.id === id);
@@ -49,7 +32,7 @@ export const postsRepositories = {
     content: string,
     blogId: string
   ) {
-    const updatePost = posts.find((p) => (p.id = id));
+    const updatePost = posts.find((p) => (p.id === id));
     if (updatePost) {
       updatePost.title = title;
       updatePost.shortDescription = shortDescription;
@@ -62,7 +45,7 @@ export const postsRepositories = {
   },
   deletePost(id: string) {
     for (let i = 0; i < posts.length; i++) {
-      if ((posts[i].id = id)) {
+      if ((posts[i].id === id)) {
         posts.splice(i, 1);
         return true;
       }
