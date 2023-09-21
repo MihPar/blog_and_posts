@@ -13,6 +13,11 @@ describe('/posts',  () => {
 		// request(app).get('/').expect(HTTP_STATUS.OK_200, [])
 	})
 
+	it('shold return 404 for not existing course', async() => {
+		await request(app).get('/posts/1').expect(HTTP_STATUS.NOT_FOUND_404) 
+	})
+
+
 	afterAll(function(done) {
 		// server.close()
 		done()

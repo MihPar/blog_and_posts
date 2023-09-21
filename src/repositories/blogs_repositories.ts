@@ -8,10 +8,10 @@ export const blogsRepositories = {
     websiteUrl: string
   ) {
     const newBlogs = {
-      id: id,
-      name: name,
-      description: description,
-      websiteUrl: websiteUrl,
+      id: new Date().toISOString(),
+      name,
+      description,
+      websiteUrl,
     };
     blogs.push(newBlogs);
     return blogs;

@@ -21,7 +21,7 @@ export const postsRepositories = {
     posts.push(newPost);
     return posts;
   },
-  findPostId(id: string) {
+  findPostId(id: string): obj | undefined {
     const post = posts.find((p) => p.id === id);
     return post;
   },
@@ -52,7 +52,7 @@ export const postsRepositories = {
     }
     return false;
   },
-  postsRepositories() {
+  deletedAllPosts() {
     const deletedAllPosts = posts.slice(0, posts.length);
     return deletedAllPosts;
   },
