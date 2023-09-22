@@ -1,4 +1,4 @@
-export type obj = {
+export type Obj = {
 	id: string
 	title: string
 	shortDescription: string
@@ -7,7 +7,7 @@ export type obj = {
 	blogName: string
 }
 
-export const posts: obj[] = [
+export const posts: Obj[] = [
 	{
 		id: "1",
 		title: "Front-end_developer",

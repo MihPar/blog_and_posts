@@ -1,11 +1,11 @@
-export type obj = {
+export type Obj = {
   id: string;
   name: string;
   description: string;
   websiteUrl: string;
 };
 
-export const blogs: obj[] = [
+export const blogs: Obj[] = [
 	{
 	  id: "1",
 	  name: "Pet",

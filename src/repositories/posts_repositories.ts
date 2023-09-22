@@ -1,4 +1,4 @@
-import { obj, posts } from "../db/db_posts"
+import { Obj, posts } from "../db/db_posts"
 
 
 export const postsRepositories = {
@@ -10,7 +10,7 @@ export const postsRepositories = {
     blogId: string,
     blogName: string
   ) {
-    const newPost: obj = {
+    const newPost: Obj = {
       id: new Date().toISOString(),
       title: title,
       shortDescription: shortDescription,
@@ -21,7 +21,7 @@ export const postsRepositories = {
     posts.push(newPost);
     return posts;
   },
-  findPostId(id: string): obj | undefined {
+  findPostId(id: string): Obj | undefined {
     const post = posts.find((p) => p.id === id);
     return post;
   },
