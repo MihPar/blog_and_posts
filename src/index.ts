@@ -9,7 +9,7 @@ export const app = express()
 app.use(bodyParser())
 app.use('/posts', postsRouter)
 app.use('/blogs', blogsRouter)
-app.use('/blogs', deletedAllRouter)
+app.use('/blogs_posts', deletedAllRouter)
 
 const PORT = process.env.PORT || 4000
 app.listen(PORT, () => {console.log(`Server was started at port ${PORT}`)})
