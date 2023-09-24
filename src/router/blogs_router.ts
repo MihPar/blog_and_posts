@@ -15,7 +15,7 @@ export const blogsRouter = Router({});
 /************************************ get ***************************/
 
 blogsRouter.get("/", function (req: Request, res: Response) {
-  res.status(200).send(blogs);
+  res.status(HTTP_STATUS.OK_200).send(blogs);
 });
 
 /************************************ post ***************************/
@@ -28,24 +28,23 @@ blogsRouter.post(
   inputBlogsWebsiteUrlValidation,
   ValueMiddleware,
   function (req: Request, res: Response) {
-    const newBlogs = blogsRepositories.createNewBlogs(
-      req.body.id,
+    const newBlog = blogsRepositories.createNewBlog(
       req.body.name,
       req.body.description,
       req.body.websiteUrl
     );
-    if (!newBlogs) {
-		res.sendStatus(HTTP_STATUS.BAD_REQUEST_400);
-    } else {
-		res.sendStatus(HTTP_STATUS.CREATED_201);
-    }
+    // if (!newBlog) {
+	// 	res.sendStatus(HTTP_STATUS.BAD_REQUEST_400);
+    // } else {
+		return res.sendStatus(HTTP_STATUS.CREATED_201);
+    // }
   }
 );
 
 /************************************ get{id} ***************************/
 
 blogsRouter.get("/:id", function (req: Request, res: Response) {
-  const blog = blogsRepositories.findBlogsId(req.params.id);
+  const blog = blogsRepositories.findBlogId(req.params.id);
   if (!blog) {
     res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
   } else {
@@ -72,17 +71,17 @@ blogsRouter.put(
     if (!isUpdateBlog) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
     } else {
-		const findBlog = blogsRepositories.findBlogsId(req.params.id);
-		res.status(HTTP_STATUS.NO_CONTENT_204).send("No content");
+		// const findBlog = blogsRepositories.findBlogId(req.params.id);
+		res.status(HTTP_STATUS.NO_CONTENT_204);
     }
   }
 );
 
-blogsRouter.delete("/:id", function (req: Request, res: Response) {
-  const findBlog = blogsRepositories.deletedBlogsId(req.params.id);
+blogsRouter.delete("/:id", authGuardMiddleware, function (req: Request, res: Response) {
+  const findBlog = blogsRepositories.deletedBlogId(req.params.id);
   if (!findBlog) {
 	res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
   } else {
-    res.status(HTTP_STATUS.NO_CONTENT_204).send("No content");
+    res.sendStatus(HTTP_STATUS.NO_CONTENT_204);
   }
 });

@@ -1,4 +1,3 @@
-import * as basicAuth from "express-basic-auth";
 import { Request, Response, NextFunction } from "express";
 import { HTTP_STATUS } from "../utils";
 

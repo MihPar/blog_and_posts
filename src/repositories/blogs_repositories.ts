@@ -1,22 +1,21 @@
 import { blogs } from "../db/db_blogs";
 
 export const blogsRepositories = {
-  createNewBlogs(
-    id: string,
+  createNewBlog(
     name: string,
     description: string,
     websiteUrl: string
   ) {
-    const newBlogs = {
+    const newBlog = {
       id: new Date().toISOString(),
       name,
       description,
       websiteUrl,
     };
-    blogs.push(newBlogs);
+    blogs.push(newBlog);
     return blogs;
   },
-  findBlogsId(id: string) {
+  findBlogId(id: string) {
     const blog = blogs.find((b) => b.id === id);
     return blog;
   },
@@ -36,7 +35,7 @@ export const blogsRepositories = {
       return false;
     }
   },
-  deletedBlogsId(id: string) {
+  deletedBlogId(id: string) {
 	for(let i = 0; i < blogs.length; i++) {
 		if(blogs[i].id === id) {
 			blogs.splice(i, 1)
@@ -45,7 +44,7 @@ export const blogsRepositories = {
 	}
 	return false
   },
-  deletedAllBlogs() {
+  deletedBlogs() {
 	const deletedAllBlogs = blogs.splice(0, blogs.length)
 	return deletedAllBlogs
   }

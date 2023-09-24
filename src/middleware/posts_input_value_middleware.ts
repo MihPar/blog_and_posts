@@ -22,10 +22,15 @@ export const content = body("content")
   .isString()
   .withMessage("content should be length from 1 to 100 symbols");
 
-export const blogId = body("blogId").notEmpty().isString().trim().custom(id => {
-	const blogIsExist = blogsRepositories.findBlogsId(id)
-	if(!blogIsExist) {
-		throw new Error('Blog not exist')
-	}
-	return true
-}).withMessage('Invalid blogId')
+export const blogId = body("blogId")
+  .notEmpty()
+  .isString()
+  .trim()
+  .custom((id) => {
+    const blogIsExist = blogsRepositories.findBlogId(id);
+    if (!blogIsExist) {
+      throw new Error("Blog not exist");
+    }
+    return true;
+  })
+  .withMessage("Invalid blogId");

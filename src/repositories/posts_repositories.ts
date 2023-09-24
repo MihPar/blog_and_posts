@@ -1,22 +1,23 @@
+import { blogs } from "../db/db_blogs";
 import { Obj, posts } from "../db/db_posts"
 
 
 export const postsRepositories = {
   createPost(
-    id: string,
     title: string,
     shortDescription: string,
     content: string,
     blogId: string,
-    blogName: string
+	blogName: string
   ) {
+
     const newPost: Obj = {
       id: new Date().toISOString(),
-      title: title,
-      shortDescription: shortDescription,
-      content: content,
-      blogId: blogId,
-      blogName: blogName,
+      title,
+      shortDescription,
+      content,
+      blogId,
+	  blogName,
     };
     posts.push(newPost);
     return posts;
@@ -32,12 +33,12 @@ export const postsRepositories = {
     content: string,
     blogId: string
   ) {
-    const updatePost = posts.find((p) => (p.id === id));
-    if (updatePost) {
-      updatePost.title = title;
-      updatePost.shortDescription = shortDescription;
-      updatePost.content = content;
-      updatePost.blogId = blogId;
+    const findPost = posts.find((p) => p.id === id);
+    if (findPost) {
+      findPost.title = title;
+      findPost.shortDescription = shortDescription;
+      findPost.content = content;
+      findPost.blogId = blogId;
       return true;
     } else {
       return false;
@@ -52,7 +53,7 @@ export const postsRepositories = {
     }
     return false;
   },
-  deletedAllPosts() {
+  deletedPosts() {
     const deletedAllPosts = posts.slice(0, posts.length);
     return deletedAllPosts;
   },

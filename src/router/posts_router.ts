@@ -10,12 +10,13 @@ import { postsRepositories } from "./../repositories/posts_repositories";
 import { Router, Request, Response } from "express";
 import { posts } from '../db/db_posts';
 import { authGuardMiddleware } from '../middleware/authGuardMiddleware';
+import { blogs } from '../db/db_blogs';
 
 export const postsRouter = Router({});
 
 /************************************ get *********************************/
 postsRouter.get("/", function (req: Request, res: Response) {
-  res.status(200).send(posts);
+  res.status(HTTP_STATUS.OK_200).send(posts);
 });
 
 /************************************ post *********************************/
@@ -29,16 +30,12 @@ postsRouter.post(
   blogId,
   ValueMiddleware,
   function (req: Request, res: Response) {
-	//const blog = findBlogById(req.params.id)
-	//if(blog){
-	//	const newPost = createPost(blog.id, blog.name, req.body.title, ...)
-	//}
-	const newPosts = postsRepositories.createPost(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId, req.body.blogName)
-	if(!newPosts) {
-		res.sendStatus(HTTP_STATUS.BAD_REQUEST_400)
-	} else {
-		res.sendStatus(HTTP_STATUS.CREATED_201)
+	let newPost
+	const blog = blogs.find((b) => b.id === req.params.id);
+	if(blog){
+		newPost = postsRepositories.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId, req.body.blogName)
 	}
+	return res.status(HTTP_STATUS.CREATED_201).send(newPost)
   }
 );
 
@@ -47,11 +44,6 @@ postsRouter.post(
 postsRouter.get(
   "/:id",
   authGuardMiddleware,
-//   postTitleValidation,
-//   shortDescriptionTitleValidation,
-//   content,
-//   blogId,
-//   ValueMiddleware,
   function(req: Request, res: Response) {
 	const post = postsRepositories.findPostId(req.params.id)
 	if(!post) {
@@ -77,7 +69,7 @@ postsRouter.put(
 	if(!isUpdatePost) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
 	} else {
-		const findPost = postsRepositories.findPostId(req.params.id)
+		// const findPost = postsRepositories.findPostId(req.params.id)
 		res.status(HTTP_STATUS.NO_CONTENT_204).send('No content')
 	}
   }
@@ -85,11 +77,11 @@ postsRouter.put(
 
 /************************************ delete{id} *********************************/
 
-postsRouter.delete('/:id', function(req: Request, res: Response) {
+postsRouter.delete('/:id', authGuardMiddleware, function(req: Request, res: Response) {
 	const findPost = postsRepositories.deletePost(req.params.id)
 	if(!findPost) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
 	} else {
-		res.status(HTTP_STATUS.NO_CONTENT_204).send('No content')
+		res.status(HTTP_STATUS.NO_CONTENT_204)
 	}
 })

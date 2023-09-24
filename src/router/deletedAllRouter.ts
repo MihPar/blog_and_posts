@@ -6,7 +6,7 @@ import { HTTP_STATUS } from "../utils"
 export const deletedAllRouter = Router({})
 
 deletedAllRouter.delete('/', function(req: Request, res: Response) {
-	postsRepositories.deletedAllPosts()
-	blogsRepositories.deletedAllBlogs()
+	postsRepositories.deletedPosts()
+	blogsRepositories.deletedBlogs()
 	return res.status(HTTP_STATUS.NO_CONTENT_204)
 })

@@ -6,10 +6,9 @@ import { deletedAllRouter } from "./router/deletedAllRouter"
 
 export const startApp = () => {
 	const app = express()
-
-app.use(bodyParser())
-app.use('/posts', postsRouter)
-app.use('/blogs', blogsRouter)
-app.use('/testing/all-data', deletedAllRouter)
-return app;
+	app.use(bodyParser())
+	app.use('/posts', postsRouter)
+	app.use('/blogs', blogsRouter)
+	app.use('/testing/all-data', deletedAllRouter)
+	return app;
 }
