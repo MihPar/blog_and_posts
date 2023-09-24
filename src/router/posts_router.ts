@@ -33,7 +33,7 @@ postsRouter.post(
 	let newPost
 	const blog = blogs.find((b) => b.id === req.params.id);
 	if(blog){
-		newPost = postsRepositories.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId, req.body.blogName)
+		newPost = postsRepositories.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
 	}
 	return res.status(HTTP_STATUS.CREATED_201).send(newPost)
   }

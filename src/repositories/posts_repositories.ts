@@ -8,16 +8,19 @@ export const postsRepositories = {
     shortDescription: string,
     content: string,
     blogId: string,
-	blogName: string
+	// blogName: string
   ) {
 
+	const blog = blogs.find(b => b.id ===blogId)
+	if(!blog) return null
+	
     const newPost: Obj = {
       id: new Date().toISOString(),
       title,
       shortDescription,
       content,
       blogId,
-	  blogName,
+	  blogName: blog.name,
     };
     posts.push(newPost);
     return posts;
