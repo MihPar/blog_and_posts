@@ -8,12 +8,10 @@ export const postsRepositories = {
     shortDescription: string,
     content: string,
     blogId: string,
-	// blogName: string
   ) {
 
-	const blog = blogs.find(b => b.id ===blogId)
+	const blog = blogs.find(b => b.id === blogId)
 	if(!blog) return null
-	
     const newPost: Obj = {
       id: new Date().toISOString(),
       title,

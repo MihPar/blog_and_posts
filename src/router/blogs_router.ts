@@ -33,11 +33,7 @@ blogsRouter.post(
       req.body.description,
       req.body.websiteUrl
     );
-    // if (!newBlog) {
-	// 	res.sendStatus(HTTP_STATUS.BAD_REQUEST_400);
-    // } else {
 		return res.status(HTTP_STATUS.CREATED_201).send(newBlog);
-    // }
   }
 );
 
@@ -71,7 +67,6 @@ blogsRouter.put(
     if (!isUpdateBlog) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
     } else {
-		// const findBlog = blogsRepositories.findBlogId(req.params.id);
 		res.sendStatus(HTTP_STATUS.NO_CONTENT_204);
     }
   }

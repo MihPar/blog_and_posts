@@ -16,11 +16,7 @@ exports.blogsRouter.get("/", function (req, res) {
 /************************************ post ***************************/
 exports.blogsRouter.post("/", authGuardMiddleware_1.authGuardMiddleware, blogs_input_value_middleware_1.inputBlogsNameValidation, blogs_input_value_middleware_1.inputBlogsDescriptionValidation, blogs_input_value_middleware_1.inputBlogsWebsiteUrlValidation, validatorMiddleware_1.ValueMiddleware, function (req, res) {
     const newBlog = blogs_repositories_1.blogsRepositories.createNewBlog(req.body.name, req.body.description, req.body.websiteUrl);
-    // if (!newBlog) {
-    // 	res.sendStatus(HTTP_STATUS.BAD_REQUEST_400);
-    // } else {
     return res.status(utils_1.HTTP_STATUS.CREATED_201).send(newBlog);
-    // }
 });
 /************************************ get{id} ***************************/
 exports.blogsRouter.get("/:id", function (req, res) {
@@ -39,7 +35,6 @@ exports.blogsRouter.put("/:id/", authGuardMiddleware_1.authGuardMiddleware, blog
         res.sendStatus(utils_1.HTTP_STATUS.NOT_FOUND_404);
     }
     else {
-        // const findBlog = blogsRepositories.findBlogId(req.params.id);
         res.sendStatus(utils_1.HTTP_STATUS.NO_CONTENT_204);
     }
 });
