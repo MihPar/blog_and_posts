@@ -29,6 +29,10 @@ postsRouter.post(
   blogId,
   ValueMiddleware,
   function (req: Request, res: Response) {
+	//const blog = findBlogById(req.params.id)
+	//if(blog){
+	//	const newPost = createPost(blog.id, blog.name, req.body.title, ...)
+	//}
 	const newPosts = postsRepositories.createPost(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId, req.body.blogName)
 	if(!newPosts) {
 		res.sendStatus(HTTP_STATUS.BAD_REQUEST_400)
@@ -43,11 +47,11 @@ postsRouter.post(
 postsRouter.get(
   "/:id",
   authGuardMiddleware,
-  postTitleValidation,
-  shortDescriptionTitleValidation,
-  content,
-  blogId,
-  ValueMiddleware,
+//   postTitleValidation,
+//   shortDescriptionTitleValidation,
+//   content,
+//   blogId,
+//   ValueMiddleware,
   function(req: Request, res: Response) {
 	const post = postsRepositories.findPostId(req.params.id)
 	if(!post) {

@@ -1,7 +1,7 @@
 import request from "supertest";
-import { app } from "../../src/index";
 import { HTTP_STATUS } from "../../src/utils";
-
+import { startApp } from "../../src/settings";
+const app = startApp()
 describe("/posts and blogs", () => {
   beforeAll(async () => {
     await request(app).delete("/__test__/data");
@@ -84,8 +84,8 @@ describe("/posts and blogs", () => {
         title: "newMan",
         shortDescription: "new decsription",
         content: "Hello Mickle",
-        blogId: "999",
-        blogName: "One",
+        blogId: "1",
+        
       })
       .expect(HTTP_STATUS.CREATED_201);
 
@@ -95,8 +95,8 @@ describe("/posts and blogs", () => {
 		title: "newMan",
         shortDescription: "new decsription",
         content: "Hello Mickle",
-        blogId: "999",
-        blogName: "One",
+        blogId: "1",
+        blogName: "Pet",
 	  })
 	  await request(app).get('/posts').expect(HTTP_STATUS.OK_200, [createResponse])
 	});

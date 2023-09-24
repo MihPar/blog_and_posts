@@ -10,7 +10,7 @@ export const blogs: Obj[] = [
 	  id: "1",
 	  name: "Pet",
 	  description: "Freelancer",
-	  websiteUrl: "http://localhost: 4000/Pet"
+	  websiteUrl: "http://localhost: 4000/Pet",
 	},
 	{
 		id: "2",
