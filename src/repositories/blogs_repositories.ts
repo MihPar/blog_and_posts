@@ -13,7 +13,7 @@ export const blogsRepositories = {
       websiteUrl,
     };
     blogs.push(newBlog);
-    return blogs;
+    return newBlog;
   },
   findBlogId(id: string) {
     const blog = blogs.find((b) => b.id === id);

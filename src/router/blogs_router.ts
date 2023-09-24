@@ -36,7 +36,7 @@ blogsRouter.post(
     // if (!newBlog) {
 	// 	res.sendStatus(HTTP_STATUS.BAD_REQUEST_400);
     // } else {
-		return res.sendStatus(HTTP_STATUS.CREATED_201);
+		return res.status(HTTP_STATUS.CREATED_201).send(newBlog);
     // }
   }
 );

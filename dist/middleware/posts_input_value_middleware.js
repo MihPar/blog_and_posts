@@ -21,10 +21,15 @@ exports.content = (0, express_validator_1.body)("content")
     .trim()
     .isString()
     .withMessage("content should be length from 1 to 100 symbols");
-exports.blogId = (0, express_validator_1.body)("blogId").notEmpty().isString().trim().custom(id => {
-    const blogIsExist = blogs_repositories_1.blogsRepositories.findBlogsId(id);
+exports.blogId = (0, express_validator_1.body)("blogId")
+    .notEmpty()
+    .isString()
+    .trim()
+    .custom((id) => {
+    const blogIsExist = blogs_repositories_1.blogsRepositories.findBlogId(id);
     if (!blogIsExist) {
-        throw new Error('Blog not exist');
+        throw new Error("Blog not exist");
     }
     return true;
-}).withMessage('Invalid blogId');
+})
+    .withMessage("Invalid blogId");

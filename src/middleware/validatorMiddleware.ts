@@ -32,10 +32,10 @@ export const ValueMiddleware = function(
   ) {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-	  const errorMessage = errors.array({onlyFirstError: true}).map(item => {
+	  const errorsMessages = errors.array({onlyFirstError: true}).map(item => {
 		return errorFormater(item)
 	  })
-	  res.status(HTTP_STATUS.BAD_REQUEST_400).send(errorMessage)
+	  res.status(HTTP_STATUS.BAD_REQUEST_400).send({errorsMessages})
 	  return 
 	} else {
 	  next();

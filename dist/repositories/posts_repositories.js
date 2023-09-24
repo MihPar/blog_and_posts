@@ -1,16 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsRepositories = void 0;
+const db_blogs_1 = require("../db/db_blogs");
 const db_posts_1 = require("../db/db_posts");
 exports.postsRepositories = {
-    createPost(id, title, shortDescription, content, blogId, blogName) {
+    createPost(title, shortDescription, content, blogId) {
+        const blog = db_blogs_1.blogs.find(b => b.id === blogId);
+        if (!blog)
+            return null;
         const newPost = {
             id: new Date().toISOString(),
-            title: title,
-            shortDescription: shortDescription,
-            content: content,
-            blogId: blogId,
-            blogName: blogName,
+            title,
+            shortDescription,
+            content,
+            blogId,
+            blogName: blog.name,
         };
         db_posts_1.posts.push(newPost);
         return db_posts_1.posts;
@@ -20,12 +24,12 @@ exports.postsRepositories = {
         return post;
     },
     updatePostId(id, title, shortDescription, content, blogId) {
-        const updatePost = db_posts_1.posts.find((p) => (p.id === id));
-        if (updatePost) {
-            updatePost.title = title;
-            updatePost.shortDescription = shortDescription;
-            updatePost.content = content;
-            updatePost.blogId = blogId;
+        const findPost = db_posts_1.posts.find((p) => p.id === id);
+        if (findPost) {
+            findPost.title = title;
+            findPost.shortDescription = shortDescription;
+            findPost.content = content;
+            findPost.blogId = blogId;
             return true;
         }
         else {
@@ -41,7 +45,7 @@ exports.postsRepositories = {
         }
         return false;
     },
-    deletedAllPosts() {
+    deletedPosts() {
         const deletedAllPosts = db_posts_1.posts.slice(0, db_posts_1.posts.length);
         return deletedAllPosts;
     },

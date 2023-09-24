@@ -27,10 +27,10 @@ exports.errorFormater = errorFormater;
 const ValueMiddleware = function (req, res, next) {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
-        const errorMessage = errors.array({ onlyFirstError: true }).map(item => {
+        const errorsMessages = errors.array({ onlyFirstError: true }).map(item => {
             return (0, exports.errorFormater)(item);
         });
-        res.status(utils_1.HTTP_STATUS.BAD_REQUEST_400).send(errorMessage);
+        res.status(utils_1.HTTP_STATUS.BAD_REQUEST_400).send({ errorsMessages });
         return;
     }
     else {
