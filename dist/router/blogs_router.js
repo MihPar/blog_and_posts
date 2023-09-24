@@ -40,7 +40,7 @@ exports.blogsRouter.put("/:id/", authGuardMiddleware_1.authGuardMiddleware, blog
     }
     else {
         // const findBlog = blogsRepositories.findBlogId(req.params.id);
-        res.status(utils_1.HTTP_STATUS.NO_CONTENT_204);
+        res.sendStatus(utils_1.HTTP_STATUS.NO_CONTENT_204);
     }
 });
 exports.blogsRouter.delete("/:id", authGuardMiddleware_1.authGuardMiddleware, function (req, res) {

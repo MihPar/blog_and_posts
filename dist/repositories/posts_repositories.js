@@ -17,7 +17,7 @@ exports.postsRepositories = {
             blogName: blog.name,
         };
         db_posts_1.posts.push(newPost);
-        return db_posts_1.posts;
+        return newPost;
     },
     findPostId(id) {
         const post = db_posts_1.posts.find((p) => p.id === id);

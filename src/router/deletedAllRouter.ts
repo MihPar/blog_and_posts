@@ -8,5 +8,5 @@ export const deletedAllRouter = Router({})
 deletedAllRouter.delete('/', function(req: Request, res: Response) {
 	postsRepositories.deletedPosts()
 	blogsRepositories.deletedBlogs()
-	return res.status(HTTP_STATUS.NO_CONTENT_204)
+	return res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
 })

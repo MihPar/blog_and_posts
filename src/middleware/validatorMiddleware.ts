@@ -13,7 +13,7 @@ import { HTTP_STATUS } from "../utils";
 	  case "field":
 		return {
 		  message: error.msg,
-		  filed: error.path,
+		  field: error.path,
 		};
 		break;
 	  default:

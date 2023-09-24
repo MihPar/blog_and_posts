@@ -9,5 +9,5 @@ exports.deletedAllRouter = (0, express_1.Router)({});
 exports.deletedAllRouter.delete('/', function (req, res) {
     posts_repositories_1.postsRepositories.deletedPosts();
     blogs_repositories_1.blogsRepositories.deletedBlogs();
-    return res.status(utils_1.HTTP_STATUS.NO_CONTENT_204);
+    return res.sendStatus(utils_1.HTTP_STATUS.NO_CONTENT_204);
 });

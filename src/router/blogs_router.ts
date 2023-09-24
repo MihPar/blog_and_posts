@@ -72,7 +72,7 @@ blogsRouter.put(
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
     } else {
 		// const findBlog = blogsRepositories.findBlogId(req.params.id);
-		res.status(HTTP_STATUS.NO_CONTENT_204);
+		res.sendStatus(HTTP_STATUS.NO_CONTENT_204);
     }
   }
 );

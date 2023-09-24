@@ -30,11 +30,7 @@ postsRouter.post(
   blogId,
   ValueMiddleware,
   function (req: Request, res: Response) {
-	let newPost
-	const blog = blogs.find((b) => b.id === req.params.id);
-	if(blog){
-		newPost = postsRepositories.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
-	}
+		const newPost = postsRepositories.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
 	return res.status(HTTP_STATUS.CREATED_201).send(newPost)
   }
 );
@@ -43,7 +39,6 @@ postsRouter.post(
 
 postsRouter.get(
   "/:id",
-  authGuardMiddleware,
   function(req: Request, res: Response) {
 	const post = postsRepositories.findPostId(req.params.id)
 	if(!post) {
@@ -82,6 +77,6 @@ postsRouter.delete('/:id', authGuardMiddleware, function(req: Request, res: Resp
 	if(!findPost) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
 	} else {
-		res.status(HTTP_STATUS.NO_CONTENT_204)
+		res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
 	}
 })

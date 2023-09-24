@@ -16,14 +16,14 @@ exports.shortDescriptionTitleValidation = (0, express_validator_1.body)("shortDe
     .isLength({ min: 1, max: 100 })
     .withMessage("Short Description should be length from 1 to 100 symbols");
 exports.content = (0, express_validator_1.body)("content")
-    .isLength({ min: 1, max: 1000 })
-    .notEmpty()
-    .trim()
     .isString()
+    .trim()
+    .notEmpty()
+    .isLength({ min: 1, max: 1000 })
     .withMessage("content should be length from 1 to 100 symbols");
 exports.blogId = (0, express_validator_1.body)("blogId")
-    .notEmpty()
     .isString()
+    .notEmpty()
     .trim()
     .custom((id) => {
     const blogIsExist = blogs_repositories_1.blogsRepositories.findBlogId(id);

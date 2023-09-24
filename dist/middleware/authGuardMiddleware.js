@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authGuardMiddleware = void 0;
 const utils_1 = require("../utils");
+const console_1 = require("console");
 // export const authGuardMiddleware = function (
 //   req: Request,
 //   res: Response,
@@ -31,17 +32,21 @@ const utils_1 = require("../utils");
 //   }
 // };
 const expectAuthHeader = "admin:qwerty";
+const encodedData = Buffer.from(expectAuthHeader).toString('base64');
 const authGuardMiddleware = function (req, res, next) {
-    if (!req.headers.authorization ||
-        !req.headers.authorization.startsWith("Basic ")) {
-        res.sendStatus(utils_1.HTTP_STATUS.NOT_AUTHORIZATION_401);
-        return;
+    try {
+        const auth = req.headers.authorization;
+        if (!auth)
+            return res.sendStatus(utils_1.HTTP_STATUS.NOT_AUTHORIZATION_401);
+        const [authType, authPayload] = auth.split(' ');
+        if (authType !== 'Basic')
+            return res.sendStatus(utils_1.HTTP_STATUS.NOT_AUTHORIZATION_401);
+        if (encodedData !== authPayload)
+            return res.sendStatus(utils_1.HTTP_STATUS.NOT_AUTHORIZATION_401);
+        return next();
     }
-    const splitHeader = req.headers.authorization.split(" ")[1];
-    const enCodeHeader = atob(splitHeader);
-    if (enCodeHeader !== expectAuthHeader) {
-        return res.sendStatus(utils_1.HTTP_STATUS.NOT_AUTHORIZATION_401);
+    catch (e) {
+        (0, console_1.log)('auth e', e);
     }
-    return next();
 };
 exports.authGuardMiddleware = authGuardMiddleware;

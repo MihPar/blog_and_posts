@@ -23,7 +23,7 @@ export const postsRepositories = {
 	  blogName: blog.name,
     };
     posts.push(newPost);
-    return posts;
+    return newPost;
   },
   findPostId(id: string): Obj | undefined {
     const post = posts.find((p) => p.id === id);

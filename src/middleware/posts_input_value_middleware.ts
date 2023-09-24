@@ -16,15 +16,15 @@ export const shortDescriptionTitleValidation = body("shortDescription")
   .withMessage("Short Description should be length from 1 to 100 symbols");
 
 export const content = body("content")
-  .isLength({ min: 1, max: 1000 })
-  .notEmpty()
-  .trim()
   .isString()
+  .trim()
+  .notEmpty()
+  .isLength({ min: 1, max: 1000 })
   .withMessage("content should be length from 1 to 100 symbols");
 
 export const blogId = body("blogId")
-  .notEmpty()
   .isString()
+  .notEmpty()
   .trim()
   .custom((id) => {
     const blogIsExist = blogsRepositories.findBlogId(id);
