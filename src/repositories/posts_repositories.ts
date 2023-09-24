@@ -34,7 +34,7 @@ export const postsRepositories = {
     content: string,
     blogId: string
   ) {
-    const findPost = posts.find((p) => p.id === blogId);
+    const findPost = posts.find((p) => p.id === id);
     if (findPost) {
       findPost.title = title;
       findPost.shortDescription = shortDescription;
