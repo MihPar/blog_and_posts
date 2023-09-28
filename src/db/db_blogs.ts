@@ -11,15 +11,21 @@ export const blogs: Obj[] = [
 		name: "Pet",
 		description: "Freelancer",
 		websiteUrl: "http://localhost: 4000/Pet",
-	},
+    },
 	{
 		id: "2",
+		name: "Pet",
+		description: "Freelancer",
+		websiteUrl: "http://localhost: 4000/Pet",
+	},
+	{
+		id: "3",
 		name: "John",
 		description: "Freelancer",
 		websiteUrl: "http://localhost: 4000/John"
 	},
 	{
-		id: "3",
+		id: "4",
 		name: "Bread",
 		description: "Freelancer",
 		websiteUrl: "http://localhost: 4000/Bread"
