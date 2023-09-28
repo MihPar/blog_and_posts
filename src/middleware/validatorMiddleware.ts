@@ -15,7 +15,6 @@ import { HTTP_STATUS } from "../utils";
 		  message: error.msg,
 		  field: error.path,
 		};
-		break;
 	  default:
 		return {
 		  message: error.msg,
