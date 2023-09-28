@@ -7,12 +7,6 @@ export type Obj = {
 
 export const blogs: Obj[] = [
 	{
-		id: "1",
-		name: "Pet",
-		description: "Freelancer",
-		websiteUrl: "http://localhost: 4000/Pet",
-    },
-	{
 		id: "2",
 		name: "Pet",
 		description: "Freelancer",
